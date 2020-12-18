@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>High Dynamic Range Imaging</title>
+  <meta name="CS 194-26 Final Project 3" content="">
+  <meta name="Glenn Wysen and Morgan Nanez" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 5%">
+        <h2 style="text-align: center;">High Dynamic Range Imaging</h2>
+        <h3 style="text-align: center;">CS 194-26 Final Project 3 - Fall 2020</h3>
+        <h4 style="text-align: center;">Glenn Wysen and Morgan Nanez</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <img class="u-full-width" src="images/chapel1.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 1</b> - Over exposed source image.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/tone chapel.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 2</b> - Radiance map taken over all exposures of initial image.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%">
+      <div class="eight columns">
+        <h4>Radiance Maps</h4>
+        <p>
+          The first step to recovering an HDR image was to find radiance maps for images which represent the overall radiance 
+          from a series of images taken of the same target with different exposures. This process involved finding a relation 
+          between pixel values (range 0-255) to exposure levels (relationship shown in <b>Fig. 3</b>). Higher values are 
+          shown in the green/yellow while lower values are blue. Another visualization of this mapping is shown in <b>Fig. 4</b>  
+          below which shows an example curve for one of the images mapping pixel values to log(intensities).
+        </p>
+        <img class="u-full-width" src="images/pixel graph.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 4</b> - A plot showing the relationship between pixel value and intensity 
+        for a random sample image.</figcaption>
+      </div>
+      <div class="four columns">
+        <img class="u-full-width" src="images/radiance map red.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 3</b> - Radiance map taken over all exposures of initial image for 
+          the red channel.</figcaption>
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Bilateral Filtering</h4>
+        <p>
+          Another step in the process was performing bilateral filtering and recovering the high detail parts of the radiance 
+          maps. A visualization of these two filters for the red channel of the chapel is shown in <b>Fig. 5</b> and <b>Fig. 6</b> 
+          below.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <img class="u-full-width" src="images/bilateral.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 5</b> - Bilateral filter applied to red channel radiance image.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/detail layer.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 6</b> - Detail map for the same image highlighting the parts where 
+          there is high radiance.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Example Results</h4>
+        <p>
+          Below are some additional results of running the whole algorithm over some sample inputs.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="three columns">
+        <img class="u-full-width" src="images/chapel1.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 7</b> - Long exposure.</figcaption>
+        <img class="u-full-width" src="images/chapel3.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 9</b> - Short exposure.</figcaption>
+      </div>
+      <div class="three columns">
+        <img class="u-full-width" src="images/chapel2.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 8</b> - Medium exposure.</figcaption>
+        <img class="u-full-width" src="images/chapel4.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 10</b> - Very short exposure.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/tone chapel.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 11</b> - HDR image.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%;">
+      <div class="three columns">
+        <img class="u-full-width" src="images/bonsai1.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 12</b> - Long exposure.</figcaption>
+        <img class="u-full-width" src="images/bonsai3.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 14</b> - Short exposure.</figcaption>
+      </div>
+      <div class="three columns">
+        <img class="u-full-width" src="images/bonsai2.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 13</b> - Medium exposure.</figcaption>
+        <img class="u-full-width" src="images/bonsai4.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 15</b> - Very short exposure.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/bonsai hdr.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 16</b> - HDR image.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%;">
+      <div class="three columns">
+        <img class="u-full-width" src="images/mug1.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 17</b> - Long exposure.</figcaption>
+        <img class="u-full-width" src="images/mug3.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 19</b> - Short exposure.</figcaption>
+      </div>
+      <div class="three columns">
+        <img class="u-full-width" src="images/mug2.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 18</b> - Medium exposure.</figcaption>
+        <img class="u-full-width" src="images/mug4.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 20</b> - Very short exposure.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/mug hdr.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 21</b> - HDR image.</figcaption>
+      </div>
+    </div>
+
+  </div>
+    
+  
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
