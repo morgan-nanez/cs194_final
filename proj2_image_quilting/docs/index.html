@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Image Quilting</title>
+  <meta name="CS 194-26 Final Project 2" content="">
+  <meta name="Glenn Wysen and Morgan Nanez" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 5%">
+        <h2 style="text-align: center;">Image Warping Quilting</h2>
+        <h3 style="text-align: center;">CS 194-26 Final Project 2 - Fall 2020</h3>
+        <h4 style="text-align: center;">Glenn Wysen and Morgan Nanez</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="four columns">
+        <img src="images/biden.jpg" alt="halfway face">
+      <figcaption style="text-align: center"> <b>Fig. 1</b> - Example texture synthesis of Joe Biden.</figcaption>
+      </div>
+      <div class="eight columns">
+        <p>
+          
+        </p>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Random Sampling Textures</h4>
+        <p>
+          The most basic way to extend a texture is to just randomly sample patches and stitch those patches together. The 
+          results of doing this using the texture in <b>Fig. 2</b> is shown in <b>Fig. 3</b>. As is obvious, this texture 
+          doesn't look very good, especially if the texture has strong horizontal or vertical dependencies like text or lines.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <img class="u-full-width" src="images/text_small.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 2</b> - Starting texture.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/random_text.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 3</b> - Random sampling texture to create larger texture.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Overlapping Patch Texture Synthesis</h4>
+        <p>
+          The next step towards making a coherent texture is to choose a patch with purpose instead of randomly sampling. 
+          To do this, an overlapping region is set and the texture is searched for patches that minimize the SSD of the 
+          overlapping region. Out of the lowest costed patches one is randomly chosen and inserted into the final image in 
+          order to provide a stochastic final texture. The results of this can be seen in <b>Fig. 6</b>. This is a clear 
+          improvement over random sampling, but there are still some artifacts and we can do even better with seam carving.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <img class="u-full-width" src="images/random_text.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 5</b> - Random sampling texture to create larger texture.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/overlap_text.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 6</b> - Minimized overlap texture.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Seam Carving</h4>
+        <p>
+          The last step of creating a cohesive texture was to take the overlapping textures and carve seams in them where the 
+          SSD in the overlapping region was the lowest. A visualization of the left patch, right patch, and overlapping section 
+          are shown below. The difference with the seam carved is artificially colored to help show the magnitudes of the 
+          difference texture. The final results of this are shown in <b>Fig. 8</b> and are slightly better 
+          than simple overlap matching from before. More examples are shown after the seam carving visualization.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns">
+        <img class="u-full-width" src="images/overlap_text.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 7</b> - Minimized overlap texture.</figcaption>
+      </div>
+      <div class="six columns">
+        <img class="u-full-width" src="images/cut_text.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 8</b> - Minimized overlap texture with seam carving.</figcaption>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="four columns">
+        <img class="u-full-width" src="images/left patch.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 9</b> - Left patch.</figcaption>
+      </div>
+      <div class="four columns">
+        <img class="u-full-width" src="images/right patch.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 10</b> - Right patch.</figcaption>
+      </div>
+      <div class="four columns">
+        <img class="u-full-width" src="images/diff with seam.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 11</b> - Difference between patches in overlapping section with 
+          red seam shown where difference is the least.</figcaption>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="five columns">
+        <img class="u-full-width" src="images/bricks_small.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 12</b> - Small brick texture.</figcaption>
+      </div>
+      <div class="seven columns">
+        <img class="u-full-width" src="images/big bricks.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 13</b> - Expanded brick texture.</figcaption>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="five columns">
+        <img class="u-full-width" src="images/white_small.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 14</b> - Small white texture.</figcaption>
+      </div>
+      <div class="seven columns">
+        <img class="u-full-width" src="images/big white.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 15</b> - Expanded white texture.</figcaption>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="five columns">
+        <img class="u-full-width" src="images/oil.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 16</b> - Small oil texture.</figcaption>
+      </div>
+      <div class="seven columns">
+        <img class="u-full-width" src="images/big oil.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 17</b> - Expanded oil texture.</figcaption>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="five columns">
+        <img class="u-full-width" src="images/strawberry.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 18</b> - Small strawberry texture.</figcaption>
+      </div>
+      <div class="seven columns">
+        <img class="u-full-width" src="images/big strawberry.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 19</b> - Expanded strawberry texture.</figcaption>
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Texture Transfer</h4>
+        <p>
+          Texture transfer is achieved by using a similar method to seam carving sampling. Instead of searching the texture 
+          image for other regions that line up with the texture, textures are searched for that line up with a different 
+          source image (the picture of Joe Biden for example). Below are some examples of texture transfer with a sketched 
+          face.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="four columns">
+        <img class="u-full-width" src="images/sketch.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 20</b> - Texture to be transferred.</figcaption>
+        <img class="u-full-width" src="images/sketch.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 23</b> - Texture to be transferred.</figcaption>
+      </div>
+      <div class="four columns">
+        <img class="u-full-width" src="images/face.png" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 21</b> - Source image.</figcaption>
+        <img class="u-full-width" src="images/joe.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 24</b> - Source image.</figcaption>
+      </div>
+      <div class="four columns">
+        <img class="u-full-width" src="images/drawn face.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 22</b> - Source image with transferred texture.</figcaption>
+        <img class="u-full-width" src="images/biden.jpg" alt="doorway">
+        <figcaption style="text-align: center"><b>Fig. 22</b> - Source image with transferred texture.</figcaption>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10%">
+      <div class="twelve columns">
+        <h4>Bells and Whistles</h4>
+        <p>
+          The cut seam code was only provided in Matlab and I wrote this project in Python so I had to write my own code for 
+          finding a seam. I did this by finding the lowest energy seam and then returning a mask with 0s on one side of 
+          the cut and 1s on the other so that when I multiplied the mask by the patch it would only grab the pixels on 
+          one side of the seam and it could blend as best as possible with the other side of the texture.
+        </p>
+      </div>
+    </div>
+
+  </div>
+    
+  
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
